@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+app.set("view engine", "ejs");
 const PORT = 8000;
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -21,6 +22,11 @@ var score = {
   team0: 0,
   team1: 0,
 };
+// const path = require("path");
+// app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.render("index", { score: score });
+});
 
 app.get("/score", (req, res) => {
   res.status(200).send(score);
