@@ -22,11 +22,12 @@ var score = {
   team1: 0,
 };
 
-app.get("/incteam", (req, res) => {
-  res.status(200).send({ score: score.team0 });
+app.get("/score", (req, res) => {
+  res.status(200).send(score);
 });
 app.patch("/incteam", (req, res) => {
-  console.log(req.body);
+  const team = "team" + req.body.faction;
+  score[team]++;
   res.end();
 });
 
